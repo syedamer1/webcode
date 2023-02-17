@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" ><a href="optionsDisplay.php?option=1">Insert</a></button>|
+<button type="button" class="btn btn-info btn-lg" id="view_btn" ><a href="optionsDisplay.php?option=2" >View</a></button>
+    </div>
+  </div>
+  
+</div>
+<script>
+viewButtonDisplay();
+function viewButtonDisplay()
+{
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "checkData.php"); 
+  xhttp.send();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            if(this.responseText==0)
+            {
+              document.getElementById('view_btn').style.display='none';
+            }
+            else{
+             document.getElementById('view_btn').style.display='block';
+            }
+        }
+    }
+    
+    return false;
+}
+</script>
+</body>
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function fetchPrintData() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "fetchdata.php");
+
+        xhr.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            var data = JSON.parse(this.responseText);
+
+            var table = document.getElementById("table-tbody");
+
+            for (var i = 0; i < data.length; i++) {
+              var row = document.createElement("tr");
+              var nametr = document.createElement("td");
+              nametr.innerHTML = data[i].name;
+              row.appendChild(nametr);
+              var agetr = document.createElement("td");
+              agetr.innerHTML = data[i].age;
+              row.appendChild(agetr);
+              var emailtr = document.createElement("td");
+              emailtr.innerHTML = data[i].email;
+              row.appendChild(emailtr);
+              table.appendChild(row);
+            }
+          }
+        };
+        xhr.send();
+      }
+
+      fetchPrintData();
+
+      function submitdata() {
+        var formData = new FormData(document.forms[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "submit.php");
+        xhr.send(formData);
+
+        fetchPrintData();
+      }
+
+      function checkForm() {
+        var name = document.getElementById("name").value;
+        var age = document.getElementById("age").value;
+        var email = document.getElementById("email").value;
+
+        if (!name) {
+          alert("Name is empty!");
+          return;
+        } else if (!age) {
+          alert("Age is empty!");
+          return;
+        } else if (!email) {
+          alert("Email is empty!");
+          return;
+        }
+
+        submitdata();
+      }
+    </script>
+  </head>
+
+  <body>
+    <form>
+      <label for="username">Name </label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        style="margin-left: 18px; margin-top: 3px; margin-bottom: 3px"
+      /><br />
+      <label for="userage">Age </label
+      ><input
+        type="text"
+        name="age"
+        id="age"
+        style="margin-left: 29px; margin-top: 3px; margin-bottom: 3px"
+      /><br />
+      <label for="useremail">Email</label
+      ><input
+        type="email"
+        name="email"
+        id="email"
+        style="margin-left: 22px; margin-top: 5px; margin-bottom: 3px"
+      /><br />
+      <button
+        style="margin-left: 60px; margin-bottom: 25px; margin-top: 3px"
+        onclick="checkForm()"
+      >
+        Add
+      </button>
+      <table border="1px">
+        <center>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody id="table-tbody"></tbody>
+        </center>
+      </table>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+<body>
+<script>
+function getResponse(){
+  var url="getAjaxResponse.php";
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange=function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+    }
+  };
+  xhttp.open("GET",url,false);
+  xhttp.send();
+  console.log('ok');
+}
+getResponse();
+getResponse();
+</script>
+</body>
+</html>

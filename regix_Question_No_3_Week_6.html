@@ -1,0 +1,11 @@
+<script>
+var regex = /[A-Z a-z 0-9 _ \-\.]+[@][a-z]+[\.][a-z]{2,3}/;
+var str = "a@gmail.com";
+
+// Test the string against the regular expression
+if(regex.test(str)) {
+    alert(true);
+} else {
+    alert(false);
+}
+</script>
